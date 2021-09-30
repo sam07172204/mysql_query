@@ -1,0 +1,61 @@
+INSERT INTO `1` SELECT * FROM `2` WHERE Datetime NOT IN (SELECT DateTime FROM `1`)
+
+
+Insert into `a` (`Serial`,`DateTime`,`torque`, `thrust`, `engine_speed`, `power`, `energy`, `total_revolutions`) 
+SELECT (UNIX_TIMESTAMP(DateTime) - UNIX_TIMESTAMP('2017-9-23 00:00:00'))/300+1,`DateTime`,`torque`, `thrust`, `engine_speed`, `power`, `energy`, `total_revolutions`
+from `a_kyma`
+
+
+
+Insert into `a_mfmssss` (`Serial`,`DateTime`,`AI1011`,`AI1012`,`AI1013`,`AI1014`,`AI1015`,`AI1016`,`AI1017`,`AI1018`,`AI1019`,`AI1020`,`AI1021`,`AI1022`,`AI1023`,`AI1024`,`AI1025`,`AI1026`,`AI1027`,`AI1028`,`AI1029`
+                         ,`AI1030`,`AI1031`,`AI1032`,`AI1033`,`AI1034`,`AI1035`,`AI1036`,`AI1037`,`AI1038`,`AI1039`,`AI1040`,`AI1041`,`AI1042`,`AI1043`,`AI1044`,`AI1045`,`AI1046`,`AI1047`,`AI1048`,`AI1049`,`AI1050`,`AI1051`,`AI1052`,`AI1053`,`AI1054`,`AI1055`,`AI1056`,`AI1057`,`AI1058`,`AI1059`,`AI1060`) 
+SELECT (UNIX_TIMESTAMP(DateTime) - UNIX_TIMESTAMP('2017-9-23 00:00:00'))/300+1,`DateTime`,`AI1011`,`AI1012`,`AI1013`,`AI1014`,`AI1015`,`AI1016`,`AI1017`,`AI1018`,`AI1019`,`AI1020`,`AI1021`,`AI1022`,`AI1023`,`AI1024`,`AI1025`,`AI1026`,`AI1027`,`AI1028`,`AI1029`
+                         ,`AI1030`,`AI1031`,`AI1032`,`AI1033`,`AI1034`,`AI1035`,`AI1036`,`AI1037`,`AI1038`,`AI1039`,`AI1040`,`AI1041`,`AI1042`,`AI1043`,`AI1044`,`AI1045`,`AI1046`,`AI1047`,`AI1048`,`AI1049`,`AI1050`,`AI1051`,`AI1052`,`AI1053`,`AI1054`,`AI1055`,`AI1056`,`AI1057`,`AI1058`,`AI1059`,`AI1060`
+from `a_mfm`
+
+
+Insert into `a_vdrserial` (`Serial`,`DateTime`,`latitude`,`longitude`, `heading`, `course`, `ground speed`, `water speed`,`rudder angle`,`wind speed`,`wind angle`,`revolutions`,`depth`) 
+SELECT (UNIX_TIMESTAMP(DateTime) - UNIX_TIMESTAMP('2017-9-23 00:00:00'))/300+1,`DateTime`,`latitude`,`longitude`, `heading`, `course`, `ground speed`, `water speed`,`rudder angle`,`wind speed`,`wind angle`,`revolutions`,`depth`
+from `a_vdr`
+
+
+Insert into `a_kpiserial` (`Serial`,`DateTime`,`ME RPM`,`Pitch`,`ME RPM*pitch`, `STW(對水船速) Knot`, `STW  差失率`, `SOG對地船速Knot`,`SOG  差失率`,`STW-SOG    (對水差失率-對地差失率)`,`艏吃水(M)`,`艉吃水(M)`,`船中吃水(M)`,`ME BHP(PS)`,`ME MCR(PS)`,`ME BHP %`,`Wind Direction(deg)`) 
+SELECT (UNIX_TIMESTAMP(DateTime) - UNIX_TIMESTAMP('2017-9-23 00:00:00'))/300+1,`DateTime`,`ME RPM`,`Pitch`,`ME RPM*pitch`, `STW(對水船速) Knot`, `STW  差失率`, `SOG對地船速Knot`,`SOG  差失率`,`STW-SOG    (對水差失率-對地差失率)`,`艏吃水(M)`,`艉吃水(M)`,`船中吃水(M)`,`ME BHP(PS)`,`ME MCR(PS)`,`ME BHP %`,`Wind Direction(deg)`
+from `a_kpi`
+
+
+匯出:
+SELECT `Serial`, `torque`,`engine_speed`, `power` FROM `a_kyma` WHERE 1
+SELECT `Serial`, `AI1011`, `AI1012`, `AI1013`, `AI1014`, `AI1015`, `AI1016`, `AI1017`, `AI1018`, `AI1019`, `AI1020`, `AI1021`, `AI1022`, `AI1023`, `AI1024`, `AI1025`, `AI1026`, `AI1027`, `AI1028`, `AI1029`, `AI1030`, `AI1031`, `AI1032`, `AI1033`, `AI1034`, `AI1035`, `AI1036`, `AI1037`, `AI1038`, `AI1039`, `AI1040`, `AI1041`, `AI1042`, `AI1043`, `AI1044`, `AI1045`, `AI1046`, `AI1047`, `AI1048`, `AI1049`, `AI1050`, `AI1051`, `AI1052`, `AI1053`, `AI1054`, `AI1055`, `AI1056`, `AI1057`, `AI1058`, `AI1059`, `AI1060` FROM `a_mfm` WHERE 1
+SELECT `Serial`, `latitude`, `longitude`, `heading`, `course`, `ground speed`, `water speed`, `depth`,`rudder angle`, `wind speed`, `wind angle`, `revolutions`  FROM `a_vdr` WHERE 1
+
+
+AVG,:
+Insert into `a_kyma_avg` (`Serial`,`torque`, `thrust`, `engine_speed`, `power`, `energy`, `total_revolutions`) 
+select `Serial` , AVG(torque), AVG(thrust),AVG(engine_speed),AVG(power),AVG(energy),AVG(total_revolutions)
+from `a_kyma`
+group by `Serial`
+
+
+Insert into `a_mfm_avg` (`Serial`,`AI1011`,`AI1012`,`AI1013`,`AI1014`,`AI1015`,`AI1016`,`AI1017`,`AI1018`,`AI1019`,`AI1020`,`AI1021`,`AI1022`,`AI1023`,`AI1024`,`AI1025`,`AI1026`,`AI1027`,`AI1028`,`AI1029`,     `AI1030`,`AI1031`,`AI1032`,`AI1033`,`AI1034`,`AI1035`,`AI1036`,`AI1037`,`AI1038`,`AI1039`,`AI1040`,`AI1041`,`AI1042`,`AI1043`,`AI1044`,`AI1045`,`AI1046`,`AI1047`,`AI1048`,`AI1049`,`AI1050`,`AI1051`,`AI1052`,`AI1053`,`AI1054`,`AI1055`,`AI1056`,`AI1057`,`AI1058`,`AI1059`,`AI1060`) 
+select `Serial`,AVG(AI1011), AVG(AI1012),AVG(AI1013),AVG(AI1014),AVG(AI1015),AVG(AI1016),AVG(AI1017),AVG(AI1018),AVG(AI1019),AVG(AI1020),AVG(AI1021), AVG(AI1022),AVG(AI1023),AVG(AI1024),AVG(AI1025),AVG(AI1026),AVG(AI1027),AVG(AI1028),AVG(AI1029),AVG(AI1030),AVG(AI1031), AVG(AI1032),AVG(AI1033),AVG(AI1034),AVG(AI1035),AVG(AI1036),AVG(AI1037),AVG(AI1038),AVG(AI1039),AVG(AI1040),AVG(AI1041), AVG(AI1042),AVG(AI1043),AVG(AI1044),AVG(AI1045),AVG(AI1046),AVG(AI1047),AVG(AI1048),AVG(AI1049),AVG(AI1050),AVG(AI1051), AVG(AI1052),AVG(AI1053),AVG(AI1054),AVG(AI1055),AVG(AI1056),AVG(AI1057),AVG(AI1058),AVG(AI1059),AVG(AI1060)
+FROM `a_mfm`
+group by `Serial`
+
+Insert into `a_vdr_avg` (`Serial`,`latitude`,`longitude`, `heading`, `course`, `ground_speed`, `water_speed`,`rudder_angle`,`wind_speed`,`wind_angle`,`revolutions`,`depth`) 
+select `Serial` , AVG(latitude), AVG(longitude),AVG(heading),AVG(course),AVG(ground_speed),AVG(water_speed),AVG(rudder_angle),AVG(wind_speed),AVG(wind_angle) , AVG(revolutions),AVG(depth)
+from `a_vdr`
+group by `Serial`
+.
+
+VARIANCE:
+Insert into `a_vdr_var` (`Serial`,`latitude`,`longitude`, `heading`, `course`, `ground_speed`, `water_speed`,`rudder_angle`,`wind_speed`,`wind_angle`,`revolutions`,`depth`) 
+select `Serial` , VARIANCE(latitude), VARIANCE(longitude),VARIANCE(heading),VARIANCE(course),VARIANCE(ground_speed),VARIANCE(water_speed),VARIANCE(rudder_angle),VARIANCE(wind_speed),VARIANCE(wind_angle) , VARIANCE(revolutions),VARIANCE(depth)
+from `a_vdr`
+group by `Serial`
+
+
+Insert into `a_mfm_var` (`Serial`,`AI1011`,`AI1012`,`AI1013`,`AI1014`,`AI1015`,`AI1016`,`AI1017`,`AI1018`,`AI1019`,`AI1020`,`AI1021`,`AI1022`,`AI1023`,`AI1024`,`AI1025`,`AI1026`,`AI1027`,`AI1028`,`AI1029`,     `AI1030`,`AI1031`,`AI1032`,`AI1033`,`AI1034`,`AI1035`,`AI1036`,`AI1037`,`AI1038`,`AI1039`,`AI1040`,`AI1041`,`AI1042`,`AI1043`,`AI1044`,`AI1045`,`AI1046`,`AI1047`,`AI1048`,`AI1049`,`AI1050`,`AI1051`,`AI1052`,`AI1053`,`AI1054`,`AI1055`,`AI1056`,`AI1057`,`AI1058`,`AI1059`,`AI1060`) 
+select `Serial`,VARIANCE(AI1011), VARIANCE(AI1012),VARIANCE(AI1013),VARIANCE(AI1014),VARIANCE(AI1015),VARIANCE(AI1016),VARIANCE(AI1017),VARIANCE(AI1018),VARIANCE(AI1019),VARIANCE(AI1020),VARIANCE(AI1021), VARIANCE(AI1022),VARIANCE(AI1023),VARIANCE(AI1024),VARIANCE(AI1025),VARIANCE(AI1026),VARIANCE(AI1027),VARIANCE(AI1028),VARIANCE(AI1029),VARIANCE(AI1030),VARIANCE(AI1031), VARIANCE(AI1032),VARIANCE(AI1033),VARIANCE(AI1034),VARIANCE(AI1035),VARIANCE(AI1036),VARIANCE(AI1037),VARIANCE(AI1038),VARIANCE(AI1039),VARIANCE(AI1040),VARIANCE(AI1041), VARIANCE(AI1042),VARIANCE(AI1043),VARIANCE(AI1044),VARIANCE(AI1045),VARIANCE(AI1046),VARIANCE(AI1047),VARIANCE(AI1048),VARIANCE(AI1049),VARIANCE(AI1050),VARIANCE(AI1051), VARIANCE(AI1052),VARIANCE(AI1053),VARIANCE(AI1054),VARIANCE(AI1055),VARIANCE(AI1056),VARIANCE(AI1057),VARIANCE(AI1058),VARIANCE(AI1059),VARIANCE(AI1060)
+FROM `a_mfm`
+group by `Serial`
